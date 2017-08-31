@@ -2,7 +2,7 @@
 # A/B Testing
 #### P7:  Udacity Data Analyst Nanodegree
 #### Author:  Whitney King (with excerpts from Udacity project template) 
-#### Date:  8/29/2017
+#### Date:  8/31/2017
 
 
 ```R
@@ -22,8 +22,13 @@ options("scipen"=100, "digits"=4)
 
     package 'ggplot2' successfully unpacked and MD5 sums checked
     
+
+    Warning message:
+    "unable to move temporary installation 'C:\Users\dooki\Documents\R\win-library\3.3\fileaf5826e1712\ggplot2' to 'C:\Users\dooki\Documents\R\win-library\3.3\ggplot2'"
+
+    
     The downloaded binary packages are in
-    	C:\Users\dooki\AppData\Local\Temp\RtmpmezPRw\downloaded_packages
+    	C:\Users\dooki\AppData\Local\Temp\RtmpiKqroK\downloaded_packages
     
 
     Warning message:
@@ -34,7 +39,7 @@ options("scipen"=100, "digits"=4)
     package 'rmarkdown' successfully unpacked and MD5 sums checked
     
     The downloaded binary packages are in
-    	C:\Users\dooki\AppData\Local\Temp\RtmpmezPRw\downloaded_packages
+    	C:\Users\dooki\AppData\Local\Temp\RtmpiKqroK\downloaded_packages
     
 
     Warning message:
@@ -505,25 +510,27 @@ cat('Net Conversion: \n',
 
 #### Summary
 
-This experiment was divided into two groups: control and experiment. The control group was enrolled in a free trial version of their chosen course after clicking *start free trial*. Upon registration, they were asked how much time they expect to be able to devote to the learning each week. The control group was not taken through this trial flow. A null hypothesis was formed stating there was no significant difference in the evaluation metrics of the two different groups, and a practical significant was set for each of these metrics.
+This experiment was divided into two groups: control and experiment. The control group was enrolled in a free trial version of their chosen course after clicking *start free trial*. Upon registration, they were asked how much time they expect to be able to devote to the learning each week. The control group was not taken through this trial flow. A null hypothesis was formed stating there was no significant difference in the evaluation metrics of the two different groups, and a practical significance was set for each of these metrics.
 
-There were a a handful of metrics to choose from, some of which were suited as invariant mertrics, and others more suited towards evaluation metrics. The invariant metrics chosen were **Number of Cookies**, **Number of Clicks**, and **Click-Through-Probability**. The evaluation metrics chosen were **Gross Conversion**, and **Net Conversion**. Due to evaluation metrics already being correlated, the Bonferroni Correction was not used.
+There were a a handful of metrics to choose from, some of which were suited as invariant mertrics, and others more suited towards evaluation metrics. The invariant metrics chosen were **Number of Cookies**, **Number of Clicks**, and **Click-Through-Probability**. The evaluation metrics chosen were **Gross Conversion**, and **Net Conversion**. Due to evaluation metrics already being correlated, the Bonferroni Correction was not used. Using the Bonferroni Correction in this case would have increased the statistical error, as well as the number of false negatives. For this experiment, all metrics needed to be met, and false negatives could impact the decision to launch. 
 
-After sanitity checks were ran, and the results of the experiement were analysed, the experiment group experienced a statistically significant decrease in **Gross Conversion** when compared to the control group at a 95% CI, and aligned with the hypothesis. However, in the case **Net Conversion**, the results were *not* found to be statistically significant, and the confidence interval exceeded the negative end of the practical significance boundary. Both effect and size tests returned the same findings.
+After sanitity checks were ran, and the results of the experiement were analyzed, the experiment group experienced a statistically significant decrease in **Gross Conversion** when compared to the control group with a 95% CI. These findings aligned with the hypothesis. However, in the case **Net Conversion**, the results were *not* found to be statistically significant, and the confidence interval exceeded the negative end of the practical significance boundary. Both effect and size tests returned the same findings.
 
 ### Recommendation
 
-The experiments design was built around gaining an understanding of if filterinf students using started study time commitment would improve the overall student experience, without negatively impacting the number of students that continue through the trial period and into full enrollment. We were able to determine there were both statistically and practically significant differences between the two groups when it came to **Gross Conversion**, however there were no significant differences with **Net Conversion**. What this means is that we saw a *decrease* in enrollment that wasn't accompanied by and increase in conversions to enrollment from the trial period. Given this fact, the reccomendation based on these findings would be to not launch this change, and to instead look into other options.
+The experiments design was built around gaining an understanding of if filtering students using stated study time commitment would improve the overall student experience, without negatively impacting the number of students that continue through the trial period and into full enrollment. We were able to determine there were both statistically and practically significant differences between the two groups when it came to **Gross Conversion**, however there were no significant differences with **Net Conversion**, and the confidence interval exceed the negative practical significance boundary. What this means is that we saw a *decrease* in enrollment that was accompanied by no differences in conversions to enrollment from the trial period, so this experiment was not effective in accomplishing it's goals. 
+
+Given these findings, the reccomendation would be to not launch this change, and to instead look into other options.
 
 ## Follow-Up Experiment
 
-The previous experiment failed given the goals stated at the beginning. Considering the way these results went, there are other options based on the idea of converting users to trial, and trials to enrollments that could make potentially interesting follow up experiments. Focusing the flow around volunteered information is maybe not the best way to select which users are shuffered into which flow, since sometimes people can be extremely off with their estimatations around things like dedication to study time.
+The previous experiment failed given the goals stated at the beginning. Considering the way these results went, there are other options based on the idea of converting users to trial, and trials to enrollments that could make potentially interesting follow up experiments. Focusing the flow around volunteered information is maybe not the best way to select which users are shuffled into which flow, since sometimes people can be extremely off with their estimatations around things like dedication to study time.
 
-Perhaps trying a number of different trial periods (such as a month long free trial) versus the standard 2-week free trial would help calm insecurities students may have about not having enough time to really get a feel for how the program will go, and if it will be a good fit for them in the long run. Instead of having a system built around user inputting information, I'd simply have the flow divert traffic to the experiment samples from any users that clicked *start free trial*.
+Perhaps trying a number of different trial periods (such as a month long free trial) versus the standard 2-week free trial would help calm insecurities students may have about not having enough time to really get a feel for how the program will go, and if it will be a good fit for them in the long run. Instead of having a system built around the user inputting information, I'd simply have the flow divert traffic to the experiment samples from any users that clicked *start free trial*.
 
-* **Null Hypothesis**: having access to a long free trial period will not increase the number of students that enroll after the free trial period
-* **Unit of Diversion**: user-id, since we'll be tracking a change that occurs on a per user base upon enrollment
-* **Invariant Metrics**:  Number of Cookies, Number of Clicks
-* **Evaluation Metrics**: Gross Conversion, Net Conversion, Retention
+* **Null Hypothesis**: having access to a longer free trial period will not increase the number of students that enroll after the free trial period
+* **Unit of Diversion**: user-id, since we'll be tracking a change that occurs on a per-user-base after enrollment
+* **Invariant Metrics**:  user-id
+* **Evaluation Metrics**: Enrollments (count of number of enrollments), keeping a single evaluation metric will keep the SE at a minimum for this experiment, and it doesn't really need another one to measure the goal
 
 If we see statistically significant change is seen in the evaluation metrics, the experiment could be launched.
